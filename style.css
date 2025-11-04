@@ -1,0 +1,169 @@
+body {
+  font-family: "Microsoft Yahei", sans-serif;
+  background: #fff;
+  margin: 0;
+  color: #333;
+}
+.menu {
+  text-align: center;
+  padding: 15px 0;
+  background: #f8f8f8;
+  border-bottom: 1px solid #eee;
+}
+.menu a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 10px;
+}
+.menu a:hover {
+  color: #0078d4;
+}
+
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 90%;
+  max-width: 1400px;
+  margin: 20px auto;
+}
+
+.card {
+  flex: 1 1 calc(20% - 20px); /* 默认每行5个 */
+  max-width: calc(20% - 20px);
+  min-width: 200px; /* 小屏时自动变少列 */
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #ddd;
+}
+.card h3 {
+  margin: 10px;
+  font-size: 18px;
+}
+.card span {
+  margin: 10px;
+  display: block;
+  font-size: 14px;
+}
+.red {
+  color: red;
+}
+
+.detail-top {
+  width: 1000px;
+  margin: 40px auto;
+  display: flex;
+  gap: 40px;
+}
+.detail-top img {
+  width: 400px;
+  border-radius: 8px;
+  background: #ddd;
+}
+.detail-info {
+  flex: 1;
+  font-size: 16px;
+}
+.detail-info p {
+  border-bottom: 1px dashed #ddd;
+  padding: 6px 0;
+}
+
+.detail-gallery {
+  width: 1000px;
+  margin: 20px auto;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.detail-gallery img {
+  width: 180px;
+  height: 120px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+  background: #ddd;
+}
+.detail-gallery img:hover {
+  transform: scale(1.05);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+@media (max-width: 1024px) {
+  .card {
+    flex: 1 1 calc(33.33% - 20px);
+    max-width: calc(33.33% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .detail-top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .detail-top img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .detail-info {
+    width: 100%;
+    text-align: left;
+  }
+
+  .detail-gallery img {
+    width: 45%;
+    height: auto;
+  }
+
+  .gallery-title h3 {
+    font-size: 18px;
+  }
+
+  .gallery-title p {
+    font-size: 13px;
+  }
+}

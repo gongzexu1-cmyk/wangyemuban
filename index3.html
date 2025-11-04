@@ -1,0 +1,225 @@
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>定制服务</title>
+    <style>
+      /* ======== 全局 ======== */
+      body {
+        font-family: "微软雅黑", sans-serif;
+        background: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* ======== 顶部菜单 ======== */
+      .menu {
+        background-color: #3f51b5;
+        color: #fff;
+        height: auto;
+        line-height: 60px;
+        width: 100%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .menu ul {
+        max-width: 1200px;
+        width: 90%;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .menu li {
+        margin: 0 10px;
+      }
+
+      .menu a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+        padding: 10px 15px;
+        display: block;
+        transition: background 0.3s;
+        border-radius: 6px;
+      }
+
+      .menu a:hover {
+        background-color: #283593;
+      }
+
+      /* ======== 主体内容 ======== */
+      .content {
+        background: #fff;
+        max-width: 1200px;
+        width: 90%;
+        margin: 30px auto;
+        padding: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #777;
+        margin-bottom: 40px;
+        font-size: 16px;
+      }
+
+      .section {
+        margin-bottom: 40px;
+      }
+
+      .section h2 {
+        font-size: 22px;
+        border-left: 5px solid #3f51b5;
+        padding-left: 10px;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      .section p {
+        line-height: 1.8;
+        color: #555;
+        margin-bottom: 10px;
+      }
+
+      .step-list {
+        list-style: decimal;
+        padding-left: 30px;
+        line-height: 1.8;
+      }
+
+      .tip {
+        background: #f8f9ff;
+        border-left: 5px solid #3f51b5;
+        padding: 10px 15px;
+        margin: 20px 0;
+        color: #444;
+        border-radius: 6px;
+      }
+
+      a.btn {
+        display: inline-block;
+        margin-top: 20px;
+        background: #3f51b5;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: background 0.3s;
+      }
+
+      a.btn:hover {
+        background: #283593;
+      }
+
+      /* ======== 页脚 ======== */
+      .hmbb {
+        background: #3f51b5;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        color: #fff;
+        margin-top: 50px;
+      }
+
+      /* ======== 响应式设计 ======== */
+      @media screen and (max-width: 992px) {
+        h1 {
+          font-size: 24px;
+        }
+
+        .content {
+          padding: 20px;
+        }
+
+        .menu a {
+          font-size: 15px;
+          padding: 8px 10px;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .menu ul {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .menu li {
+          margin: 5px 0;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        .section h2 {
+          font-size: 18px;
+        }
+
+        .content {
+          width: 95%;
+          padding: 15px;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        h1 {
+          font-size: 20px;
+        }
+
+        .subtitle {
+          font-size: 14px;
+        }
+
+        .menu a {
+          font-size: 14px;
+        }
+
+        .hmbb {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======= 导航菜单 ======= -->
+    <div class="menu">
+      <ul>
+        <li><a href="index.html">全部网页</a></li>
+        <li><a href="index2.html">教程中心</a></li>
+        <li><a href="index3.html">定制服务</a></li>
+      </ul>
+    </div>
+
+    <!-- ======= 主体内容 ======= -->
+    <div class="content">
+      <h1>定制服务</h1>
+      <p class="subtitle">根据你的要求定制你的网页</p>
+
+      <div class="section">
+        <h2>添加小助理联系方式</h2>
+        <p>备注定制网页</p>
+        <ul class="step-list">
+          <li><b>V</b> —— mushui510</li>
+          <li><b>V</b> —— afffdw</li>
+        </ul>
+      </div>
+
+      <a href="index.html" class="btn">返回模板展示页</a>
+    </div>
+
+    <!-- ======= 页脚 ======= -->
+    <div class="hmbb">© 2025 网页模板教程页 | 大学生网页设计工作室</div>
+  </body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模板详情</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        background: #f5f5f5;
+        font-family: "Microsoft YaHei", sans-serif;
+      }
+
+      .content {
+        background: #fff;
+        width: 90%;
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .detail-top {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .detail-info {
+        flex: 1;
+        min-width: 280px;
+      }
+
+      .detail-info h2 {
+        font-size: 22px;
+        margin-bottom: 10px;
+      }
+
+      .red {
+        color: red;
+        font-weight: bold;
+      }
+
+      hr {
+        margin: 30px 0;
+        border: none;
+        border-top: 1px dashed #ddd;
+      }
+
+      .gallery-title {
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      .gallery-title h3 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 6px;
+      }
+
+      .gallery-title p {
+        font-size: 14px;
+        color: #666;
+      }
+
+      .detail-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .detail-gallery img {
+        width: 220px;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .detail-gallery img:hover {
+        transform: scale(1.05);
+      }
+
+      /* 弹窗样式 */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      .modal-img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 10px;
+      }
+
+      .modal-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #fff;
+        font-size: 40px;
+        cursor: pointer;
+        user-select: none;
+        transition: 0.2s;
+      }
+
+      .modal-btn:hover {
+        color: #ffcc00;
+      }
+
+      .prev-btn {
+        left: 5%;
+      }
+
+      .next-btn {
+        right: 5%;
+      }
+
+      @media (max-width: 768px) {
+        .detail-top {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .detail-info {
+          width: 100%;
+          text-align: left;
+        }
+
+        .detail-gallery img {
+          width: 45%;
+          height: auto;
+        }
+
+        .modal-btn {
+          font-size: 32px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="content">
+      <div class="detail-top">
+        <div class="detail-info">
+          <h2 id="detail-name"></h2>
+          <p>编号：<span id="detail-id"></span></p>
+          <p>价格：<span class="red" id="detail-price"></span> 元</p>
+          <p>页数：<span id="detail-pages"></span> 页</p>
+          <p id="detail-desc"></p>
+        </div>
+      </div>
+
+      <hr />
+
+      <!-- 底部文字 -->
+      <div class="gallery-title" id="galleryText"></div>
+
+      <!-- 图片区域 -->
+      <div class="detail-gallery" id="gallery"></div>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      const data = templates[id];
+
+      if (data) {
+        document.getElementById("detail-id").textContent = id;
+        document.getElementById("detail-name").textContent = data.name;
+        document.getElementById("detail-price").textContent = data.price;
+        document.getElementById("detail-pages").textContent = data.pages;
+        document.getElementById("detail-desc").textContent = data.desc;
+
+        const galleryTextDiv = document.getElementById("galleryText");
+        galleryTextDiv.innerHTML = `
+          <h3>更多页面预览如下：点击图片可放大查看，并支持左右翻页浏览</h3>
+          <p>${
+            data.galleryText ||
+            "说明：成品源码属于可多次销售的哦，但是同一个学校同一份只卖一次，所以请一定要备注学校全称，避免重复！请理解哦！ 成品不提供技术指导和免费修改服务的哈，不支持退换货的哦，拍前请选好自己心仪的网页成品！"
+          }</p>
+        `;
+
+        const gallery = document.getElementById("gallery");
+        let currentIndex = 0;
+
+        data.images.forEach((src, index) => {
+          const img = document.createElement("img");
+          img.src = src;
+          img.onclick = () => showModal(index);
+          gallery.appendChild(img);
+        });
+
+        function showModal(index) {
+          currentIndex = index;
+          const modal = document.createElement("div");
+          modal.className = "modal";
+          modal.innerHTML = `
+            <span class="modal-btn prev-btn">&#10094;</span>
+            <img src="${data.images[index]}" class="modal-img">
+            <span class="modal-btn next-btn">&#10095;</span>
+          `;
+          document.body.appendChild(modal);
+
+          const imgElement = modal.querySelector(".modal-img");
+
+          const updateImage = () => {
+            imgElement.src = data.images[currentIndex];
+          };
+
+          modal.querySelector(".prev-btn").onclick = (e) => {
+            e.stopPropagation();
+            currentIndex =
+              (currentIndex - 1 + data.images.length) % data.images.length;
+            updateImage();
+          };
+
+          modal.querySelector(".next-btn").onclick = (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex + 1) % data.images.length;
+            updateImage();
+          };
+
+          modal.onclick = () => modal.remove();
+        }
+      } else {
+        document.body.innerHTML = "<p>找不到该模板的详细信息。</p>";
+      }
+    </script>
+  </body>
+</html>
